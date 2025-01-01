@@ -15,7 +15,7 @@ import javafx.geometry.Insets;
 
 
 
-public class FileChooser1 extends Application {
+public class FileChooserGUI extends Application {
 
   @Override
   public void start(Stage primaryStage) {
@@ -28,6 +28,10 @@ public class FileChooser1 extends Application {
     selectFilesButton.setOnAction(event -> {
       // Create a FileChooser
       FileChooser fileChooser = new FileChooser();
+
+      // Set the initial directory (replace with your desired path)
+      File initialDirectory = new File("C:\\Users\\ryosh\\Documents\\Battery_Testing_Data");
+      fileChooser.setInitialDirectory(initialDirectory);
 
       // Set file chooser properties
       fileChooser.setTitle("Select Files");

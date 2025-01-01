@@ -20,7 +20,7 @@ public class ReadFileNames {
         System.out.println("No files found in the folder.");
         return;
       }
-
+//System.out.println(fileNames);
       for (String fileName : fileNames) {
         System.out.println(fileName);
       }

@@ -39,10 +39,10 @@ public class DataViewer extends Application{
     stage.setTitle("Line Chart (X-Y Chart) X:Battery Voltage Y:Time");
     //defining the axes
 //    final NumberAxis xAxis;
-    NumberAxis xAxis;
-    xAxis = new NumberAxis(); // (no arguments) will auto scale: args set lower/upper bounds and tick unit
+    final NumberAxis xAxis;
+      xAxis = new NumberAxis(); // (no arguments) will auto scale: args set lower/upper bounds and tick unit
 //    final NumberAxis yAxis = new NumberAxis();
-    NumberAxis yAxis = new NumberAxis(12 ,13.5, 0.1); // Lower bound, upper bound, tick unit
+    final NumberAxis yAxis = new NumberAxis(12 ,13.5, 0.1); // Lower bound, upper bound, tick unit
 //    NumberAxis yAxis = new NumberAxis(); // Empty args = autoscale is enabled
     xAxis.setLabel("Time (Seconds)");
     yAxis.setLabel("Voltage (V)");
