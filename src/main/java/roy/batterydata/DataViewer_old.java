@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class DataViewer extends Application{
+public class DataViewer_old extends Application{
   ArrayList<double[]> dataPairs;
   String dataName;
 
@@ -22,14 +22,14 @@ public class DataViewer extends Application{
 
 
 
-  public DataViewer(){
+  public DataViewer_old(){
     ChartData chartData2 = new ChartData("C:\\Users\\ryosh\\OneDrive\\Desktop\\Squoosh.csv", 11, new int[]{0,2});
 
     this.dataPairs = chartData2.dataPairs;
     this.dataName = "Squoosh";
   }
 
-  public DataViewer(ArrayList<double[]> dataPairs, String dataName){
+  public DataViewer_old(ArrayList<double[]> dataPairs, String dataName){
     this.dataPairs = dataPairs;
     this.dataName = dataName;
   }
@@ -38,36 +38,19 @@ public class DataViewer extends Application{
   public void start(Stage stage) {
     stage.setTitle("Line Chart (X-Y Chart) X:Battery Voltage Y:Time");
     //defining the axes
-//    final NumberAxis xAxis;
-    NumberAxis xAxis;
-    xAxis = new NumberAxis(); // (no arguments) will auto scale: args set lower/upper bounds and tick unit
-//    final NumberAxis yAxis = new NumberAxis();
-    NumberAxis yAxis = new NumberAxis(12 ,13.5, 0.1); // Lower bound, upper bound, tick unit
-//    NumberAxis yAxis = new NumberAxis(); // Empty args = autoscale is enabled
+    final NumberAxis xAxis;
+    xAxis = new NumberAxis();
+    final NumberAxis yAxis = new NumberAxis();
     xAxis.setLabel("Time (Seconds)");
     yAxis.setLabel("Voltage (V)");
-
-
-
-
-
     //creating the chart
-//    final LineChart<Number, Number> lineChart =
-    LineChart<Number, Number> lineChart =
+    final LineChart<Number, Number> lineChart =
         new LineChart<>(xAxis, yAxis);
 
     lineChart.setTitle("Battery Test Data");
-
-    // CSS style sheet in resources used to set each point size smaller--default has large circles
-    lineChart.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-
     //defining a series
     XYChart.Series<Number, Number> series = new XYChart.Series<>();
     series.setName("Squoosh1");
-
-
-
-
 
     for (int i = 0; i < dataPairs.size(); i++) {
       series.getData().add(new XYChart.Data<>(dataPairs.get(i)[0],dataPairs.get(i)[1]));
@@ -89,4 +72,3 @@ public class DataViewer extends Application{
   }
 
 }
-
