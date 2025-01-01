@@ -17,6 +17,9 @@ import javafx.geometry.Insets;
 
 public class FileChooserGUI extends Application {
 
+
+
+
   @Override
   public void start(Stage primaryStage) {
 
@@ -30,8 +33,8 @@ public class FileChooserGUI extends Application {
       FileChooser fileChooser = new FileChooser();
 
       // Set the initial directory (replace with your desired path)
-      File initialDirectory = new File("C:\\Users\\ryosh\\Documents\\Battery_Testing_Data");
-      fileChooser.setInitialDirectory(initialDirectory);
+//      File initialDirectory = new File("C:\\Users\\ryosh\\Documents\\Battery_Testing_Data");
+//      fileChooser.setInitialDirectory(initialDirectory);
 
       // Set file chooser properties
       fileChooser.setTitle("Select Files");
@@ -86,17 +89,18 @@ public class FileChooserGUI extends Application {
     VBox.setMargin(label1, new Insets(10,100,1,40));
     VBox.setMargin(selectFilesButton, new Insets(1, 100, 20, 40)); // Top, Right, Bottom, Left
 
-    Scene scene = new Scene(root, 400, 200);
+    Scene scene = new Scene(root, 1080, 640);
 
     primaryStage.setTitle("Battery Data Viewer");
     primaryStage.setScene(scene);
-    primaryStage.show();
+    primaryStage.show();   //// COMMENTED THIS OUT TO CALL THIS CLASS ////
 
   }
 
-
   public static void main(String[] args) {
+
     launch(args);
   }
 }
+//}
 

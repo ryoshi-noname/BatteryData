@@ -1,13 +1,8 @@
 package roy.batterydata;
 
-import java.awt.*;
-import java.io.FileReader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-//import com.opencsv.CSVReaderBuilder;
-//import com.opencsv.exceptions.CsvException;
-
 import java.util.*;
 import java.io.*;
 
@@ -17,15 +12,16 @@ public class ChartData {
 
   public ArrayList<double[]> dataPairs;
 
-  ChartData()  {
-    this("",0, new int[]{});
-    System.out.println("Printing from ChartData");
-  }
+//  ChartData()  {
+//    this("",0, new int[]{});
+////    System.out.println("Printing from ChartData");
+//  }
 
   ChartData(String csvFile, int rowsToSkip, int[] columnsToRead)  {
     System.out.println(csvFile);
     System.out.println(rowsToSkip);
     System.out.println(Arrays.toString(columnsToRead));
+    System.out.println("Printing from ChartData");
     this.rowsToSkip = rowsToSkip;
     this.columnsToRead = columnsToRead;
 try {
@@ -41,7 +37,7 @@ catch (Exception e) {
     File fileToRead = new File(csvFilePath);
 
     if( !fileToRead.exists() || !fileToRead.isFile()){
-      throw new RuntimeException("Bad File Name or File Not Found");
+      throw new RuntimeException("File Not Found or Bad File Name");
     }
 
     Scanner scan = new Scanner(fileToRead);

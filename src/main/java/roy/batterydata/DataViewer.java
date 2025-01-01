@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class DataViewer extends Application{
+
+
   ArrayList<double[]> dataPairs;
   String dataName;
 
@@ -37,6 +39,9 @@ public class DataViewer extends Application{
   @Override
   public void start(Stage stage) {
     stage.setTitle("Line Chart (X-Y Chart) X:Battery Voltage Y:Time");
+
+//new FileChooserGUI fileChooser();
+
     //defining the axes
 //    final NumberAxis xAxis;
     final NumberAxis xAxis;
@@ -76,11 +81,11 @@ public class DataViewer extends Application{
 
 
 
-    Scene scene  = new Scene(lineChart,800,600);
+    Scene scene  = new Scene(lineChart,1080,640);
     lineChart.getData().add(series);
 
     stage.setScene(scene);
-    stage.show();
+    stage.show();          ///// COMMENTING THIS OUT TO CALL METHOD ////
 
   }
 
