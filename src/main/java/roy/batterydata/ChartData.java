@@ -1,66 +1,70 @@
 package roy.batterydata;
 
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
 
 public class ChartData {
-  private final int rowsToSkip; // Number of rows to skip (e.g., header row)
-  private final int[] columnsToRead; // Indices of columns to read (e.g., first and third column)
+    private final int rowsToSkip; // Number of rows to skip (e.g., header row)
+    private final int[] columnsToRead; // Indices of columns to read (e.g., first and third column)
+    public final ArrayList<Double[]> dataPairs;
 
-  public ArrayList<double[]> dataPairs;
-
-//  ChartData()  {
-//    this("",0, new int[]{});
-////    System.out.println("Printing from ChartData");
-//  }
-
-  ChartData(String csvFile, int rowsToSkip, int[] columnsToRead)  {
-    System.out.println(csvFile);
-    System.out.println(rowsToSkip);
-    System.out.println(Arrays.toString(columnsToRead));
-    System.out.println("Printing from ChartData");
-    this.rowsToSkip = rowsToSkip;
-    this.columnsToRead = columnsToRead;
-try {
-  readData(csvFile);
-}
-catch (Exception e) {
-
-}
-  }
-
-
-  private void readData(String csvFilePath)  throws Exception{
-    File fileToRead = new File(csvFilePath);
-
-    if( !fileToRead.exists() || !fileToRead.isFile()){
-      throw new RuntimeException("File Not Found or Bad File Name");
+    ChartData() {
+        this.dataPairs = new ArrayList<>();
+        this.rowsToSkip = 0;
+        this.columnsToRead = new int[]{};
     }
 
-    Scanner scan = new Scanner(fileToRead);
+    ChartData(String fileName, int rowsToSkip, int[] columnsToRead) {
+        dataPairs = new ArrayList<>();
 
-    for (int i=0; i<rowsToSkip; i++){
-      scan.nextLine();
+        this.rowsToSkip = rowsToSkip;
+        this.columnsToRead = columnsToRead;
+        try {
+            readData(new File(fileName));
+        } catch (Exception e) {
+        }
     }
 
-    ArrayList<double[]> dataPairs = new ArrayList<>();
-    String[] dataRow;
+    ChartData(File file, int rowsToSkip, int[] columnsToRead) {
+        this.dataPairs = new ArrayList<>();
+        this.rowsToSkip = rowsToSkip;
+        this.columnsToRead = columnsToRead;
 
-    while (scan.hasNextLine()){
-      dataRow = scan.nextLine().split(",");
-      double[] xyValues = new double[columnsToRead.length];
-
-      for (int i=0; i<columnsToRead.length; i++){
-        xyValues[i]= Double.parseDouble(dataRow[columnsToRead[i]]);
-      }
-
-      dataPairs.add(xyValues);
-
+        readData(file);
     }
-    this.dataPairs = dataPairs;
 
-  }
+    private void readData(File f) {
+
+        if (!f.exists() || !f.isFile()) {
+            System.out.println("File Not Found or Bad File Name");
+            return;
+        }
+
+        Scanner scan;
+
+        try {
+            scan = new Scanner(f);
+        } catch (Exception e) {
+            return;
+        }
+
+        for (int i = 0; i < rowsToSkip; i++) {
+            scan.nextLine();
+        }
+
+        String[] dataRow;
+
+        while (scan.hasNextLine()) {
+            dataRow = scan.nextLine().split(",");
+            Double[] xyValues = new Double[columnsToRead.length];
+
+            for (int i = 0; i < columnsToRead.length; i++) {
+                xyValues[i] = Double.parseDouble(dataRow[columnsToRead[i]]);
+            }
+
+            dataPairs.add(xyValues);
+        }
+    }
 }

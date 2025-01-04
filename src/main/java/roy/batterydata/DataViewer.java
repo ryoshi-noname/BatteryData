@@ -1,97 +1,53 @@
 package roy.batterydata;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.stage.Stage;
+import java.io.File;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import java.util.ArrayList;
+public class DataViewer {
+    private static final Pattern FILE_NAME_PATTERN = Pattern.compile(".*\\\\(.*)\\..*");
 
-public class DataViewer extends Application{
+    public static Scene generateScene(String chartName, List<File> files) {
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Time (seconds)");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Voltage");
+        // Set custom bounds for the axes
+        xAxis.setLowerBound(10); // Set lower limit of X-axis
+        xAxis.setUpperBound(13.5); // Set upper limit of X-axis
 
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle(chartName);
 
-  ArrayList<double[]> dataPairs;
-  String dataName;
+        for(int j = 0; j < files.size(); j++){
+            File cur = files.get(j);
 
-  // Additional development notes
-  // 1) Need a constructor(??) to find the csvFile name from the folder.
-  // 2) Also need to initialize the rowsToSkip and columnsToRead here for easy maintenance.
-  // 3) Somehow need a "loop" or "forEach" structure to read in multiple data sets with different names.
-  // 4) It may be possible to use the filechooser in javaFX to filter the files to process.
-  // 5) Try to make the axes rescalable--need to see how this is done in javaFX.
+            ChartData chartData = new ChartData(files.get(j), MainApp.ROWS_TO_SKIP, MainApp.COLUMNS_TO_READ);
+            Matcher m = FILE_NAME_PATTERN.matcher(cur.getAbsolutePath());
+            if(!m.matches()) {
+                throw new RuntimeException("Bad file name");
+            }
 
+            String dataName = m.group(1);
 
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            series.setName(dataName);
 
-  public DataViewer(){
-    ChartData chartData2 = new ChartData("C:\\Users\\ryosh\\OneDrive\\Desktop\\Squoosh.csv", 11, new int[]{0,2});
+            for (Double[] point : chartData.dataPairs) {
+                series.getData().add(new XYChart.Data<>(point[0], point[1]));
+            }
 
-    this.dataPairs = chartData2.dataPairs;
-    this.dataName = "Squoosh";
-  }
+            lineChart.getData().add(series);
+        }
 
-  public DataViewer(ArrayList<double[]> dataPairs, String dataName){
-    this.dataPairs = dataPairs;
-    this.dataName = dataName;
-  }
-
-  @Override
-  public void start(Stage stage) {
-    stage.setTitle("Line Chart (X-Y Chart) X:Battery Voltage Y:Time");
-
-//new FileChooserGUI fileChooser();
-
-    //defining the axes
-//    final NumberAxis xAxis;
-    final NumberAxis xAxis;
-      xAxis = new NumberAxis(); // (no arguments) will auto scale: args set lower/upper bounds and tick unit
-//    final NumberAxis yAxis = new NumberAxis();
-    final NumberAxis yAxis = new NumberAxis(12 ,13.5, 0.1); // Lower bound, upper bound, tick unit
-//    NumberAxis yAxis = new NumberAxis(); // Empty args = autoscale is enabled
-    xAxis.setLabel("Time (Seconds)");
-    yAxis.setLabel("Voltage (V)");
-
-
-
-
-
-    //creating the chart
-//    final LineChart<Number, Number> lineChart =
-    LineChart<Number, Number> lineChart =
-        new LineChart<>(xAxis, yAxis);
-
-    lineChart.setTitle("Battery Test Data");
-
-    // CSS style sheet in resources used to set each point size smaller--default has large circles
-    lineChart.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-
-    //defining a series
-    XYChart.Series<Number, Number> series = new XYChart.Series<>();
-    series.setName("Squoosh1");
-
-
-
-
-
-    for (int i = 0; i < dataPairs.size(); i++) {
-      series.getData().add(new XYChart.Data<>(dataPairs.get(i)[0],dataPairs.get(i)[1]));
-
+        return new Scene(lineChart, 1080, 640);
     }
-
-
-
-    Scene scene  = new Scene(lineChart,1080,640);
-    lineChart.getData().add(series);
-
-    stage.setScene(scene);
-    stage.show();          ///// COMMENTING THIS OUT TO CALL METHOD ////
-
-  }
-
-  public static void main(String[] args){
-    launch(args);
-  }
-
 }
+
+
 
