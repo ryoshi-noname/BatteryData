@@ -5,6 +5,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// This class "ChartData" reads in the chart data from the selected folder and files
+// that is selected with the FileChooserGUI class. The data that is returned is "dataPairs"
+
+
 public class ChartData {
     private final int rowsToSkip; // Number of rows to skip (e.g., header row)
     private final int[] columnsToRead; // Indices of columns to read (e.g., first and third column)

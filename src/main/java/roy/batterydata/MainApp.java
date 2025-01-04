@@ -22,9 +22,12 @@ public class MainApp extends Application {
             // ROWS_TO_SKIP:      File from ZKETECH EBD-A20H battery tester has "11" lines of headers that are not CSV data
             // COLUMNS_TO_READ:   1st and 3rd columns contain the time and voltage values */
 
+
+            //JavaFX GUI code
             Button button = new Button("Select Files");
             ArrayList<List<Double[]>> dataSets = new ArrayList<>();
 
+            // button press calls javaFX FileChooser API to select folder & files
             button.setOnAction((ActionEvent e) -> {
                 List<File> files = FileChooserGUI.openFileChooser(primaryStage);
 
@@ -35,6 +38,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(root, 1080, 640);
             primaryStage.setTitle("Team 2367 Battery Tester Data Viewer");
             primaryStage.setScene(scene);
+
             primaryStage.show();
         }
 
