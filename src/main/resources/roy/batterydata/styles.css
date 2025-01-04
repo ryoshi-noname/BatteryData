@@ -1,4 +1,5 @@
 .chart-line-symbol {
-    -fx-background-radius: 1; /* Make the points smaller */
-    -fx-padding: 0;          /* Adjust spacing around points */
+    -fx-background-radius: 5; /* Not sure what this does for each point */
+    -fx-padding: 3;          /* This seems to be controlling the point size */
+    /* Note: If radius/padding is 0, the legend will not show color codes */
 }
