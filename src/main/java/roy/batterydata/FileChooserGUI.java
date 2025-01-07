@@ -12,8 +12,8 @@ public class FileChooserGUI {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Files");
 
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", "*.*"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files", "*.csv"));
+//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", "*.*"));
 
         List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
 

@@ -1,5 +1,87 @@
 .chart-line-symbol {
-    -fx-background-radius: 5; /* Not sure what this does for each point */
+    -fx-background-radius: 1; /* Not sure what this does for each point */
     -fx-padding: 3;          /* This seems to be controlling the point size */
-    /* Note: If radius/padding is 0, the legend will not show color codes */
+    /* Note: If background radius/padding is 0, the legend will not show color codes */
 }
+.chart-legend {
+   -fx-font-size: 1em;
+}
+
+.chart-title {
+  -fx-text-fill: darkturquoise;
+  -fx-font-size: 1.8em;
+  -fx-font-weight: bold;
+  -fx-text-align: center;
+}
+
+.chart-series-line {
+-fx-stroke-width: 5px;
+-fx-effect: null;
+
+}
+
+/* Tried using a darker color palette, but can change it to user preference
+   Color Palette and names of colors are here:
+   https://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html */
+
+ .chart-series-line {
+    .series0.chart-series-line {-fx-stroke: green } /* Don't know why, but first color in series always uses
+                                                        default value orange, so this first line is basically
+                                                        a dummy value that doesn't do anything */
+    .series1.chart-series-line {-fx-stroke: blueviolet }
+    .series2.chart-series-line {-fx-stroke: aquamarine }
+    .series3.chart-series-line {-fx-stroke: purple }
+    .series4.chart-series-line {-fx-stroke: peru }
+    .series5.chart-series-line {-fx-stroke: dodgerblue }
+    .series6.chart-series-line {-fx-stroke: lime }
+    .series7.chart-series-line {-fx-stroke: lightseagreen }
+    .series8.chart-series-line {-fx-stroke: gold }
+    .series9.chart-series-line {-fx-stroke: orangered }
+    .series10.chart-series-line {-fx-stroke: orchid }
+    .series11.chart-series-line {-fx-stroke: darkgoldenrod }
+    .series12.chart-series-line {-fx-stroke: orange }
+    .series13.chart-series-line {-fx-stroke: navy }
+    .series14.chart-series-line {-fx-stroke: maroon }
+    .series15.chart-series-line {-fx-stroke: silver }
+    .series16.chart-series-line {-fx-stroke: gray }
+    .series17.chart-series-line {-fx-stroke: burlywood }
+    .series18.chart-series-line {-fx-stroke: chartreuse }
+    .series19.chart-series-line {-fx-stroke: chocolate }
+    .series20.chart-series-line {-fx-stroke: darkcyan }
+    .series21.chart-series-line {-fx-stroke: darkred }
+    .series22.chart-series-line {-fx-stroke: teal }
+    .series23.chart-series-line {-fx-stroke: darkturquoise }
+    .series24.chart-series-line {-fx-stroke: deeppink }
+    .series0.chart-series-line {-fx-stroke: green }  /* Putting first color in series here seems to override default */
+    }
+
+.chart-line-symbol {
+    .series0.chart-line-symbol {-fx-background-color: green, white; }
+    .series1.chart-line-symbol {-fx-background-color: blueviolet, white; }
+    .series2.chart-line-symbol {-fx-background-color: aquamarine, white; }
+    .series3.chart-line-symbol {-fx-background-color: purple, white; }
+    .series4.chart-line-symbol {-fx-background-color: peru, white; }
+    .series5.chart-line-symbol {-fx-background-color: dodgerblue, white; }
+    .series6.chart-line-symbol {-fx-background-color: lime, white; }
+    .series7.chart-line-symbol {-fx-background-color: lightseagreen, white; }
+    .series8.chart-line-symbol {-fx-background-color: gold, white; }
+    .series9.chart-line-symbol {-fx-background-color: orangered, white; }
+    .series10.chart-line-symbol {-fx-background-color: orchid, white; }
+    .series11.chart-line-symbol {-fx-background-color: darkgoldenrod, white; }
+    .series12.chart-line-symbol {-fx-background-color: orange, white; }
+    .series13.chart-line-symbol {-fx-background-color: navy, white; }
+    .series14.chart-line-symbol {-fx-background-color: maroon, white; }
+    .series15.chart-line-symbol {-fx-background-color: silver, white; }
+    .series16.chart-line-symbol {-fx-background-color: gray, white; }
+    .series17.chart-line-symbol {-fx-background-color: burlywood, white; }
+    .series18.chart-line-symbol {-fx-background-color: chartreuse, white; }
+    .series19.chart-line-symbol {-fx-background-color: chocolate, white; }
+    .series20.chart-line-symbol {-fx-background-color: darkcyan, white; }
+    .series21.chart-line-symbol {-fx-background-color: darkred, white; }
+    .series22.chart-line-symbol {-fx-background-color: teal, white; }
+    .series23.chart-line-symbol {-fx-background-color: darkturquoise, white; }
+    .series24.chart-line-symbol {-fx-background-color: deeppink, white; }
+    .series0.chart-line-symbol {-fx-background-color: green, white; }
+
+ }
+

@@ -22,18 +22,19 @@ public class DataViewer {
 
     // regex expression to capture the data file name to use as labels for each set of data
     // regex is filtering out the windows path name and capturing only the filename without ".csv" extension
-    private static final Pattern FILE_NAME_PATTERN = Pattern.compile(".*\\\\(.*)\\..*");
+    private static final Pattern FILE_NAME_PATTERN = Pattern.compile(
+        "(.*?)([^\\\\.]+)(\\.[^\\\\.]*)?");
 
     public static Scene generateScene(String chartName, List<File> files) {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Time (seconds)");
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Voltage");
+        yAxis.setLabel("Battery Voltage (volts)");
         // Set custom bounds for the Y axes
         yAxis.setAutoRanging(false);
-        yAxis.setLowerBound(9); // Set lower limit of Y-axis
-        yAxis.setUpperBound(13.5); // Set upper limit of Y-axis
-
+        yAxis.setLowerBound(11.75); // Set lower limit of Y-axis
+        yAxis.setUpperBound(13.25); // Set upper limit of Y-axis
+        yAxis.setTickUnit(0.1);
 
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle(chartName);
@@ -47,7 +48,7 @@ public class DataViewer {
                 throw new RuntimeException("Bad file name");
             }
 
-            String dataName = m.group(1);
+            String dataName = m.group(2);
 
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName(dataName);
@@ -59,19 +60,16 @@ public class DataViewer {
 
             lineChart.getData().add(series);
 
-//            Node line = series.getNode();
-//            String color = line.getStyle().replaceAll(".*-fx-stroke:\\s*([^;]+);.*", "$1");
-//            Set<Node> legendItem = lineChart.lookupAll(".chart-legend-item");
-//            Label legendLabel = (Label) legendItem.lookup(".chart-legend-item-symbol + Label");
-////                            legendLabel.setStyle("-fx-text-fill: " + color + ";");
         }
 
         Scene scene = new Scene(lineChart, 1080, 640);
 
         // Code below lets the javaFX scene use the "styles.css" file, located in resources of the project
         // to modify elements (called nodes in javaFX) in the scene
-        URL cssUrl = DataViewer.class.getResource("styles.css");
+
+            URL cssUrl = DataViewer.class.getResource("styles.css");
         if (cssUrl != null) {
+            System.out.println("using CSS style sheet");
             scene.getStylesheets().add(cssUrl.toExternalForm());
         } else {
             System.err.println("Stylesheet not found!");
