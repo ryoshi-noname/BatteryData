@@ -2,9 +2,13 @@ package roy.batterydata;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.io.File;
 //import java.util.ArrayList;
@@ -23,12 +27,21 @@ public class MainApp extends Application {
 
             //JavaFX GUI code
             Button button = new Button("Select Files");
+            Font font = Font.font("Arial", FontWeight.BOLD, 30);
+            button.setFont(font);
 
             // button press calls javaFX FileChooser API to select folder & files
             button.setOnAction((ActionEvent e) -> {
-                List<File> files = FileChooserGUI.openFileChooser(primaryStage);
 
-                primaryStage.setScene(DataViewer.generateScene("Team 2367\nBattery Tester Data Viewer", files));
+                List<File> files = FileChooserGUI.openFileChooser(primaryStage);
+                Label label = new Label(".........Please Wait........\nProcessing Data Files");
+                label.setFont(font);
+                label.setAlignment(Pos.CENTER);
+                Scene scene = new Scene(label, 1080, 640);
+                primaryStage.setScene(scene);
+
+                primaryStage.setScene(DataViewer.generateScene("Team 2367\nBattery Tester Data Viewer",
+                    files));
             });
 
             StackPane root = new StackPane(button);

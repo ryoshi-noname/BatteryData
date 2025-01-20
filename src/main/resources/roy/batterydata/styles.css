@@ -5,7 +5,10 @@
 }
 .chart-legend {
    -fx-font-size: 1em;
+   -fx-padding: 20 10 10 20; /* Adjust padding: top, right, bottom, left */
+       -fx-background-color: lightgray; /* Optional: background color for the legend */
 }
+
 
 .chart-title {
   -fx-text-fill: darkturquoise;

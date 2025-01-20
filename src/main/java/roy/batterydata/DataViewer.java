@@ -7,6 +7,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -34,7 +35,12 @@ public class DataViewer {
         yAxis.setAutoRanging(false);
         yAxis.setLowerBound(11.75); // Set lower limit of Y-axis
         yAxis.setUpperBound(13.25); // Set upper limit of Y-axis
+//        yAxis.setUpperBound(13.75); // Set upper limit of Y-axis -- useful setting for initial battery state
         yAxis.setTickUnit(0.1);
+//        xAxis.setAutoRanging(false);  // xAxis code useful for zooming in on initial battery state
+//        xAxis.setLowerBound(0);
+//        xAxis.setUpperBound(10);
+//        xAxis.setTickUnit(1);
 
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle(chartName);
@@ -53,12 +59,19 @@ public class DataViewer {
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName(dataName);
 
+//            int x = 0;
+
             for (Double[] point : chartData.dataPairs) {
                 series.getData().add(new XYChart.Data<>(point[0], point[1]));
+//                Label label = new Label(".........Please Wait........\nProcessed " + x + " Data Files" );
+//                Scene scene = new Scene(label,1080, 640 );
+//                stage.setScene(scene);
+//                x++;
 
             }
 
             lineChart.getData().add(series);
+
 
         }
 
