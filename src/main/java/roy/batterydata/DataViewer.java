@@ -63,15 +63,10 @@ public class DataViewer {
 
             for (Double[] point : chartData.dataPairs) {
                 series.getData().add(new XYChart.Data<>(point[0], point[1]));
-//                Label label = new Label(".........Please Wait........\nProcessed " + x + " Data Files" );
-//                Scene scene = new Scene(label,1080, 640 );
-//                stage.setScene(scene);
-//                x++;
 
             }
 
             lineChart.getData().add(series);
-
 
         }
 
