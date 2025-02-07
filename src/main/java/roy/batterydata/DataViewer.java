@@ -1,18 +1,18 @@
 package roy.batterydata;
 
-import javafx.application.Platform;
-import javafx.scene.Node;
+//import javafx.application.Platform;
+//import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+//import javafx.scene.control.Label;
+//import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,7 +35,7 @@ public class DataViewer {
         yAxis.setAutoRanging(false);
         yAxis.setLowerBound(11.75); // Set lower limit of Y-axis
         yAxis.setUpperBound(13.25); // Set upper limit of Y-axis
-//        yAxis.setUpperBound(13.75); // Set upper limit of Y-axis -- useful setting for initial battery state
+//      yAxis.setUpperBound(13.75); // Set upper limit of Y-axis -- useful setting for initial battery state
         yAxis.setTickUnit(0.1);
 //        xAxis.setAutoRanging(false);  // xAxis code useful for zooming in on initial battery state
 //        xAxis.setLowerBound(0);
@@ -45,12 +45,10 @@ public class DataViewer {
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle(chartName);
 
-        for(int j = 0; j < files.size(); j++){
-            File cur = files.get(j);
-
-            ChartData chartData = new ChartData(files.get(j), MainApp.ROWS_TO_SKIP, MainApp.COLUMNS_TO_READ);
+        for (File cur : files) {
+            ChartData chartData = new ChartData(cur, MainApp.ROWS_TO_SKIP, MainApp.COLUMNS_TO_READ);
             Matcher m = FILE_NAME_PATTERN.matcher(cur.getAbsolutePath());
-            if(!m.matches()) {
+            if (!m.matches()) {
                 throw new RuntimeException("Bad file name");
             }
 
@@ -58,8 +56,6 @@ public class DataViewer {
 
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName(dataName);
-
-//            int x = 0;
 
             for (Double[] point : chartData.dataPairs) {
                 series.getData().add(new XYChart.Data<>(point[0], point[1]));

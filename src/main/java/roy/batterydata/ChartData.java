@@ -20,7 +20,7 @@ public class ChartData {
         this.columnsToRead = new int[]{};
     }
 
-    ChartData(String fileName, int rowsToSkip, int[] columnsToRead) {
+    ChartData(String fileName, int rowsToSkip, int[] columnsToRead) throws RuntimeException {
         dataPairs = new ArrayList<>();
 
         this.rowsToSkip = rowsToSkip;
@@ -28,6 +28,7 @@ public class ChartData {
         try {
             readData(new File(fileName));
         } catch (Exception e) {
+            throw new RuntimeException("Read Data Error in ChartData.java");
         }
     }
 

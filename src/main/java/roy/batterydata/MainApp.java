@@ -44,8 +44,8 @@ public class MainApp extends Application {
                     files));
             });
 
-            StackPane root = new StackPane(button);
-            Scene scene = new Scene(root, 1080, 640);
+            StackPane selectFilesWindow = new StackPane(button);
+            Scene scene = new Scene(selectFilesWindow, 1080, 640);
 
             primaryStage.setTitle("Team 2367 Battery Tester Data Viewer");
 
